@@ -63,11 +63,17 @@ class Client
 admin = null
 clients = []
 game_state = 0 # key: 0 => setup, # => (question N), -1 => done
+buzzer_state = off # false by dfeault 
+buzzed_in = []
 SETUP = 0
 RIGHT_CUTOFF = 1
 
 broadcast = (message) ->
   c.stream.write(message + "\n") for c in clients
+
+command_drink = (client) ->
+  #TODO: bell
+  broadcast "#{client.name} has to drink!"
 
 broadcast_question = (number) ->
   broadcast "question ##{number}:"
@@ -87,6 +93,15 @@ process_guess = (c, solution) ->
   question = solutions[game_state]
   if game_state is SETUP
     return c.stream.write "Game hasn't started yet, chill\n"
+  if buzzer_state is on
+    buzzed_in.push c unless c in buzzed_in
+    if buzzed_in.length + 2 == clients.length # all except last guy and admin
+      #who has to drink 
+      broadcast "OK, buzzer's done!"
+      command_drink cl for cl in clients when (not (cl in buzzed_in) and not (cl is admin))
+      buzzed_in = []
+      buzzer_state = off
+    return
   if question.answer == solution.trim()
     #correct!
     broadcast "#{c.name} got question #{game_state} right!"
@@ -132,6 +147,7 @@ server = net.createServer((stream) ->
     else if client is admin and game_state is SETUP and data == "start" #game start
       game_state = 1 #start
       broadcast "Starting Game... here we go!"
+      #start the first '
       broadcast_question game_state
     else # guess
       process_guess client, data
@@ -143,5 +159,21 @@ server = net.createServer((stream) ->
     stream.end()
   )
 )
+
+#Bell rings, respond last and you drink 
+setInterval(( ->
+  return if game_state is SETUP
+  setTimeout(( ->
+    buzzer_state = on
+    buzzed_in = []
+    broadcast "last one to respond to this (with any message) has to drink"
+  ), parseInt(Math.random() * 10) * 1000) # sometime in the next 110 seconds)
+), 15 * 1000) #should be 120
+#Set timeout every 8 minutes
+every_n_minutes = 8
+setInterval(( ->
+  if game_state > SETUP
+    broadcast "Every 3 minutes, you drink. Wasn't kidding about that."
+), every_n_minutes * 60 * 1000)
 
 server.listen 7000
