@@ -1,3 +1,8 @@
-1.  1 client is god and decides state of the game.
-    - can only join when game state is 'SETUP'
-    - 
+Notes for what to fix:
+- note who has/has not responded for the bell already and have an upper limit
+- better writeup for coin question (25/10/5/1)
+- timeout for questions (or manual DM override)
+- ability to re-join if dropped and you were around before
+- who is null and why does he keep leaving?
+----
+- for now, kill 'last one to respond' (on dm response)
