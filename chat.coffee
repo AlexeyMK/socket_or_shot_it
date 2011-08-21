@@ -117,7 +117,7 @@ process_guess = (c, solution) ->
       #TODO: tell the right people to drink
       game_state +=1
       if game_state >= solutions.length
-        broadcast_drink "Game over! Thanks for playing. Also, drink."
+        all_drink "Game over! Thanks for playing. Also, drink."
         #TODO who won
       else
         broadcast_question game_state
@@ -179,7 +179,7 @@ setInterval(( ->
 every_n_minutes = 8
 setInterval(( ->
   if game_state > SETUP
-    broadcast_drink "Every 3 minutes, you drink. Wasn't kidding about that."
+    all_drink "Every 3 minutes, you drink. Wasn't kidding about that."
 ), every_n_minutes * 60 * 1000)
 
 server.listen 7000

@@ -1,4 +1,10 @@
-Notes for what to fix:
+Background: I wrote this for the LAL hackathon (http://www.facebook.com/event.php?eid=160130867395240).
+
+Based on an early version of https://github.com/ry/node_chat 
+(http://dhotson.tumblr.com/post/271733389/a-simple-chat-server-in-node-js)
+
+Notes for what to fix for next time (at least)
+- Questions in their own file (these are basically burned now)
 - note who has/has not responded for the bell already and have an upper limit
 - better writeup for coin question (25/10/5/1)
 - timeout for questions (or manual DM override)
