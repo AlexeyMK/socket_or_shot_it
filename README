@@ -4,7 +4,7 @@ Based on an early version of https://github.com/ry/node_chat
 (http://dhotson.tumblr.com/post/271733389/a-simple-chat-server-in-node-js)
 
 TODO
-- Rewrite using express.js and socket.io
+- Rewrite using meteor
   x Player shows up, we get their name.
   x We have a list of player's names.
   x Admin can 'start game'
@@ -17,7 +17,5 @@ TODO
 - Questions in their own file (these are basically burned now)
 - Convert question to markdown
 - timeout for questions (or manual DM override)
-- ability to re-join if dropped and you were around before
+x ability to re-join if dropped and you were around before
 - scoreboard
-----
-- for now, kill 'last one to respond' (on dm response)
