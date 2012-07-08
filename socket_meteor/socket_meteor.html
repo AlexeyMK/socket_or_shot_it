@@ -7,7 +7,10 @@
 </body>
 
 <template name="main">
-  {{#if game_in_session }}
+  {{# if is_admin }}
+    {{> admin_panel }}
+  {{/if}}
+  {{# if game_started }}
     <div id="main">
     {{# if player_in_game }}
       {{> current_question }}
@@ -19,8 +22,39 @@
       Score goes here
     </div>
   {{else}}
-    {{> register_new_user }}
+    {{# if player_in_game }}
+      {{> wait_for_start }}
+    {{else}}
+      {{> register_new_user }}
+    {{/if}}
   {{/if}}
+  <div id="contestant_list">
+    {{> contestant_list}}
+  </div>
+</template>
+
+<template name="admin_panel">
+  <div id="admin_panel" style="border:solid;">
+  <h3>Admin Panel</h3>
+  {{#unless game_started }}
+    <button id="start_game">Start Game</button>
+  {{/unless}}
+  </div>
+</template>
+
+<template name="wait_for_start">
+  {{contestant_name}}, we'll start in a few minutes
+</template>
+
+<template name="contestant_list">
+  <h3> In Game</h3>
+  <ul>
+  {{#each contestants }}
+    <li>{{name}}</li>
+  {{else}}
+    <li>Nobody has registered</li>
+  {{/each}}
+  </ul>
 </template>
 
 <template name="spectator">

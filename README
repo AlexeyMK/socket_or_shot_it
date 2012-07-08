@@ -5,9 +5,9 @@ Based on an early version of https://github.com/ry/node_chat
 
 TODO
 - Rewrite using express.js and socket.io
-  - Player shows up, we get their name.
-  - We have a list of player's names.
-  - Admin can 'start game'
+  x Player shows up, we get their name.
+  x We have a list of player's names.
+  x Admin can 'start game'
   - Players see question of current round
   - Players can answer questions
     - Get response "right or wrong"
