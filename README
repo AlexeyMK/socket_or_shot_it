@@ -1,14 +1,23 @@
 Background: I wrote this for the LAL hackathon (http://www.facebook.com/event.php?eid=160130867395240).
 
-Based on an early version of https://github.com/ry/node_chat 
+Based on an early version of https://github.com/ry/node_chat
 (http://dhotson.tumblr.com/post/271733389/a-simple-chat-server-in-node-js)
 
-Notes for what to fix for next time (at least)
+TODO
+- Rewrite using express.js and socket.io
+  - Player shows up, we get their name.
+  - We have a list of player's names.
+  - Admin can 'start game'
+  - Players see question of current round
+  - Players can answer questions
+    - Get response "right or wrong"
+  - Logic for moving to the next round
+  - Leaderboard/updates
+- provide half-decent interface (bootstrap?)
 - Questions in their own file (these are basically burned now)
-- note who has/has not responded for the bell already and have an upper limit
-- better writeup for coin question (25/10/5/1)
+- Convert question to markdown
 - timeout for questions (or manual DM override)
 - ability to re-join if dropped and you were around before
-- who is null and why does he keep leaving?
+- scoreboard
 ----
 - for now, kill 'last one to respond' (on dm response)
