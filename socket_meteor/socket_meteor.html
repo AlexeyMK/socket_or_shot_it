@@ -3,8 +3,46 @@
 </head>
 
 <body>
-  {{> hello}}
+  {{> main }}
 </body>
+
+<template name="main">
+  {{#if game_in_session }}
+    <div id="main">
+    {{# if player_in_game }}
+      {{> current_question }}
+    {{else}}
+      {{> spectator }}
+    {{/if}}
+    </div>
+    <div id="scoreboard">
+      Score goes here
+    </div>
+  {{else}}
+    {{> register_new_user }}
+  {{/if}}
+</template>
+
+<template name="spectator">
+  Sorry, game's started, why don't you watch?
+</template>
+
+<template name="current_question">
+  <div id="current_question">
+    What is 2 x 2?
+    <input id="answer" type="text">
+    <button id="answer_button">Submit</button>
+  </div>
+</template>
+
+<template name="register_new_user">
+  <div id="register">
+    <input id="username" type="text">
+    <button id="register_button">Register</button>
+  </div>
+</template>
+
+
 
 <template name="hello">
   <h1>Hello World!</h1>

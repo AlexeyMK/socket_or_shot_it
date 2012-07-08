@@ -5,3 +5,6 @@ if Meteor.is_client
 
   Template.hello.events =
     "click input": -> console.log "You pressed the button!!"
+
+  Template.main.game_in_session = true
+  Template.main.player_in_game = true
