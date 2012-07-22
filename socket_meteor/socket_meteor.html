@@ -59,7 +59,7 @@
 </template>
 
 <template name="wait_for_start">
-  {{contestant_name}}, we'll start in a few minutes
+<h2>{{contestant_name}}, we'll start in a few minutes</h2>
 </template>
 
 <template name="scoreboard">
@@ -79,12 +79,14 @@
 
 <template name="current_question">
   <div id="current_question">
-    Question # {{ question_number }}
-    {{ question_text }}
-    <input id="answer" type="text">
-    <button id="answer_question">Submit</button>
-    <p id="feedback"></p>
+    <h1>Question # {{ question_number }}</h1>
+    <p>{{ question_text }}</p>
+    <p>
+      <input id="answer" type="text">
+      <button id="answer_question">Submit</button>
+    </p>
   </div>
+  <h1 id="feedback"></h1>
 </template>
 
 <template name="register_new_user">

@@ -124,7 +124,7 @@ if Meteor.is_client
     current_question().text
 
   Template.current_question.question_number = ->
-    current_question().round
+    current_question().round + 1
 
   Template.current_question.events =
     "click button#answer_question": ->
