@@ -26,6 +26,12 @@ if Meteor.is_server
 server_state = ->
   ServerState.findOne({})
 
+next_round = ->
+  ServerState.update {},
+    $inc:
+      current_round: 1
+  $('#current_question').show()
+
 get_contestants = ->
   results = Contestants.find().map (c) ->
     # Resolve duplicate names by using an ID prefix
@@ -51,7 +57,27 @@ game_over = ->
 
 update_correct_answer = (contestant, round) ->
   # update points
-  # maybe move to next round
+  num_solutions = Answers.find(
+    round: round,
+    correct: true
+  ).count()
+  num_points_won = server_state().points_for_correct[num_solutions]
+
+  # prevent multiple correct submissions
+  return if Answers.findOne(
+    round: round
+    contestant_id: contestant._id
+    correct: true
+  )?
+  Answers.insert
+    contestant_id: contestant._id
+    round: round
+    point_value: num_points_won
+    correct: true
+
+  if num_solutions + 1 == server_state().points_for_correct.length
+    next_round()
+
 update_wrong_answer = (contestant, round) ->
   value = server_state().penalty_for_wrong
   console.log "inserting", value
@@ -107,6 +133,7 @@ if Meteor.is_client
       if String(answer) is String(current_question().solution)
         update_correct_answer(get_contestant(), current_question().round)
         $('#feedback').text "good job"
+        $('#current_question').hide()
       else
         console.log "wrong answer"
         update_wrong_answer(get_contestant(), current_question().round)
@@ -124,9 +151,7 @@ if Meteor.is_client
           current_round: 1
     "click button#next_round": ->
       console.log "next round"
-      ServerState.update {},
-        $inc:
-          current_round: 1
+      next_round()
 
   get_contestant = ->
     contestant = Session.get('contestant')
