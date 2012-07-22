@@ -21,7 +21,7 @@ if Meteor.is_server
     ServerState.insert
       current_round: -1
       points_for_correct: [10,5,3]  # this also indicates 3 correct total
-      penalty_for_wrong: 2
+      penalty_for_wrong: -2
 
 server_state = ->
   ServerState.findOne({})
@@ -49,8 +49,17 @@ game_over = ->
   # can't find the current question, must be over
   game_started() and not current_question()
 
-update_correct_answer = -> 1
-update_wrong_answer = -> 1
+update_correct_answer = (contestant, round) ->
+  # update points
+  # maybe move to next round
+update_wrong_answer = (contestant, round) ->
+  value = server_state().penalty_for_wrong
+  console.log "inserting", value
+  Answers.insert
+    contestant_id: contestant._id
+    round: round
+    point_value: value
+    correct: false
 
 if Meteor.is_client
   Template.main.game_started = -> game_started()
@@ -76,7 +85,11 @@ if Meteor.is_client
       scoreboard[c._id] =
         name: c.display_name
         score: 0
-        other_stuff: 'hi'
+
+    # iterate over answers
+    Answers.find().forEach (answer) ->
+      console.log answer, answer.point_value
+      scoreboard[answer.contestant_id].score += answer.point_value
 
     (v for k, v of scoreboard)
 
@@ -95,6 +108,7 @@ if Meteor.is_client
         update_correct_answer(get_contestant(), current_question().round)
         $('#feedback').text "good job"
       else
+        console.log "wrong answer"
         update_wrong_answer(get_contestant(), current_question().round)
         $('#feedback').text "not quite"
 
@@ -106,7 +120,8 @@ if Meteor.is_client
     "click button#start_game": ->
       console.log "start game clicked"
       ServerState.update {},
-        current_round: 0
+        $inc:
+          current_round: 1
     "click button#next_round": ->
       console.log "next round"
       ServerState.update {},
