@@ -1,7 +1,12 @@
 # Shared code
 Contestants = new Meteor.Collection('contestant')
-ServerState = new Meteor.Collection('serverstate')
 Questions = new Meteor.Collection('question')
+Answers = new Meteor.Collection('answer')
+# {question, contestant} -> correct_or_incorrect, point_diff
+
+ServerState = new Meteor.Collection('serverstate')
+# stores a bunch of state, only one row. basically a hack
+# current_round: -1 => not started, 0..n => question #n, >n => over
 
 if Meteor.is_server
   Meteor.startup ->
@@ -15,12 +20,22 @@ if Meteor.is_server
       solution: 'good'
     ServerState.insert
       current_round: -1
+      points_for_correct: [10,5,3]  # this also indicates 3 correct total
+      penalty_for_wrong: 2
 
-# stores a bunch of state, only one row. basically a hack
-# current_round: -1 => not started, 0..n => question #n, >n => over
-#
+server_state = ->
+  ServerState.findOne({})
+
+get_contestants = ->
+  results = Contestants.find().map (c) ->
+    # Resolve duplicate names by using an ID prefix
+    c.display_name = "#{ c.name } (#{c._id[..4]}) "
+    c
+  console.log "contestants: #{results}", results
+  results
+
 round_number = ->
-  number = ServerState.findOne({})?.current_round
+  number = server_state()?.current_round
   if number? then number else -1
 
 current_question = ->
@@ -54,9 +69,16 @@ if Meteor.is_client
       Session.set('contestant', Contestants.findOne(contestant_id,
         reactive: false))
 
-  Template.contestant_list.contestants = ->
-    Contestants.find
-      name: $ne: ''
+  Template.scoreboard.contestants = ->
+    scoreboard = {}
+    console.log "updating contestants"
+    get_contestants().forEach (c) ->
+      scoreboard[c._id] =
+        name: c.display_name
+        score: 0
+        other_stuff: 'hi'
+
+    (v for k, v of scoreboard)
 
   Template.current_question.question_text = ->
     current_question().text

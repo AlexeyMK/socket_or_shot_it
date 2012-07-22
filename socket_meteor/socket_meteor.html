@@ -22,9 +22,6 @@
       {{/if}}
       </div>
     {{/if}}
-    <div id="scoreboard">
-      Score goes here
-    </div>
   {{else}}
     {{# if player_in_game }}
       {{> wait_for_start }}
@@ -32,8 +29,8 @@
       {{> register_new_user }}
     {{/if}}
   {{/if}}
-  <div id="contestant_list">
-    {{> contestant_list}}
+  <div id="scoreboard">
+    {{> scoreboard}}
   </div>
 </template>
 
@@ -56,11 +53,11 @@
   {{contestant_name}}, we'll start in a few minutes
 </template>
 
-<template name="contestant_list">
+<template name="scoreboard">
   <h3> In Game</h3>
   <ul>
   {{#each contestants }}
-    <li>{{name}}</li>
+    <li>{{name}} has {{score}} points</li>
   {{else}}
     <li>Nobody has registered</li>
   {{/each}}

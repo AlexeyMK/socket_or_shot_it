@@ -11,8 +11,8 @@ TODO
   x Admin can 'start game'
   x Players see question of current round
   - Players can answer questions
-    - Get response "right or wrong"
-    - questions hidden from users
+    x Get response "right or wrong"
+    - correct answer securely hidden
   x Logic for moving to the next round manually
   - Logic for moving to the next round when # of qs solved
   - Leaderboard/updates
