@@ -1,5 +1,7 @@
 <head>
   <title>socket_meteor</title>
+  <link href="bootstrap.css" rel="stylesheet">
+  <link href="bootstrap-responsive.css" rel="stylesheet">
 </head>
 
 <body>
@@ -7,31 +9,38 @@
 </body>
 
 <template name="main">
+<div class="container-fluid">
   {{# if is_admin }}
+  <div class="row-fluid">
+    <div class="span12">
     {{> admin_panel }}
-  {{/if}}
-  {{# if game_started }}
-    {{# if game_over }}
-      Game's over!
-    {{else}}
-      <div id="main">
-      {{# if player_in_game }}
-        {{> current_question }}
-      {{else}}
-        {{> spectator }}
-      {{/if}}
-      </div>
-    {{/if}}
-  {{else}}
-    {{# if player_in_game }}
-      {{> wait_for_start }}
-    {{else}}
-      {{> register_new_user }}
-    {{/if}}
-  {{/if}}
-  <div id="scoreboard">
-    {{> scoreboard}}
+    </div>
   </div>
+  {{/if}}
+  <div class="row-fluid">
+    <div class="span8">
+      {{# if game_started }}
+        {{# if game_over }}
+          <h1>Game's over!</h1>
+        {{else}}
+          {{# if player_in_game }}
+            {{> current_question }}
+          {{else}}
+            {{> spectator }}
+          {{/if}}
+        {{/if}}
+      {{else}}
+        {{# if player_in_game }}
+          {{> wait_for_start }}
+        {{else}}
+          {{> register_new_user }}
+        {{/if}}
+      {{/if}}
+    </div>
+    <div id="span4">
+      {{> scoreboard}}
+    </div>
+</div>
 </template>
 
 <template name="admin_panel">
