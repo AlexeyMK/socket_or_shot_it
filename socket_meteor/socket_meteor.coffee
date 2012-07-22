@@ -31,9 +31,7 @@ game_started = ->
 
 game_over = ->
   # can't find the current question, must be over
-  over = game_started() and not current_question()
-  console.log "over: #{over}"
-  over
+  game_started() and not current_question()
 
 if Meteor.is_client
   Template.main.game_started = -> game_started()
@@ -63,9 +61,8 @@ if Meteor.is_client
     current_question().round
 
   Template.admin_panel.game_started = -> game_started()
-  Template.admin_panel.game_over = ->
-    console.log "admin checking if game is over"
-    game_over()
+  Template.admin_panel.game_over = -> game_over()
+
   Template.admin_panel.events =
     "click button#start_game": ->
       console.log "start game clicked"

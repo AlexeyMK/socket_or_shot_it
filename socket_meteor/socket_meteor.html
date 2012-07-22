@@ -41,13 +41,13 @@
   <div id="admin_panel" style="border:solid;">
   <h3>Admin Panel</h3>
   {{#if game_started }}
-    <button id="next_round">Next Round</button>
-  {{else}}
     {{#if game_over }}
       Game's over, no buttons for you
     {{else}}
-      <button id="start_game">Start Game</button>
+      <button id="next_round">Next Round</button>
     {{/if}}
+  {{else}}
+      <button id="start_game">Start Game</button>
   {{/if}}
   </div>
 </template>

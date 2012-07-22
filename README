@@ -4,19 +4,17 @@ Based on an early version of https://github.com/ry/node_chat
 (http://dhotson.tumblr.com/post/271733389/a-simple-chat-server-in-node-js)
 
 
-BUGS:
-- names are empty (probably a cookie bug)
-- admin panel next round doesn't update
-
 TODO
 - Rewrite using express.js and socket.io
   x Player shows up, we get their name.
   x We have a list of player's names.
   x Admin can 'start game'
-  - Players see question of current round
+  x Players see question of current round
   - Players can answer questions
     - Get response "right or wrong"
-  - Logic for moving to the next round
+    - questions hidden from users
+  x Logic for moving to the next round manually
+  - Logic for moving to the next round when # of qs solved
   - Leaderboard/updates
 - provide half-decent interface (bootstrap?)
 - Questions in their own file (these are basically burned now)
@@ -24,6 +22,7 @@ TODO
 - timeout for questions (or manual DM override)
 - ability to re-join if dropped and you were around before
 - scoreboard
+- admin is really admin
 - change name to Ballmer Peak reference (Peakathaon? Ballmer Challenge?)
 ----
 - for now, kill 'last one to respond' (on dm response)
