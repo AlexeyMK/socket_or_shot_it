@@ -10,19 +10,20 @@ TODO
   x We have a list of player's names.
   x Admin can 'start game'
   x Players see question of current round
-  - Players can answer questions
+  x Players can answer questions
     x Get response "right or wrong"
-    - correct answer securely hidden
   x Logic for moving to the next round manually
-  - Logic for moving to the next round when # of qs solved
-  - Leaderboard/updates
+  x Logic for moving to the next round when # of qs solved
+  x Leaderboard/updates
+- admin is really admin
 - provide half-decent interface (bootstrap?)
+- better description from points
 - Questions in their own file (these are basically burned now)
+- correct answer securely hidden
 - Convert question to markdown
 - timeout for questions (or manual DM override)
+- question clock timer
 - ability to re-join if dropped and you were around before
-- scoreboard
-- admin is really admin
 - change name to Ballmer Peak reference (Peakathaon? Ballmer Challenge?)
 ----
 - for now, kill 'last one to respond' (on dm response)
