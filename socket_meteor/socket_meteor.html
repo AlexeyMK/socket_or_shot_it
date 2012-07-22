@@ -11,13 +11,17 @@
     {{> admin_panel }}
   {{/if}}
   {{# if game_started }}
-    <div id="main">
-    {{# if player_in_game }}
-      {{> current_question }}
+    {{# if game_over }}
+      Game's over!
     {{else}}
-      {{> spectator }}
+      <div id="main">
+      {{# if player_in_game }}
+        {{> current_question }}
+      {{else}}
+        {{> spectator }}
+      {{/if}}
+      </div>
     {{/if}}
-    </div>
     <div id="scoreboard">
       Score goes here
     </div>
@@ -36,9 +40,15 @@
 <template name="admin_panel">
   <div id="admin_panel" style="border:solid;">
   <h3>Admin Panel</h3>
-  {{#unless game_started }}
-    <button id="start_game">Start Game</button>
-  {{/unless}}
+  {{#if game_started }}
+    <button id="next_round">Next Round</button>
+  {{else}}
+    {{#if game_over }}
+      Game's over, no buttons for you
+    {{else}}
+      <button id="start_game">Start Game</button>
+    {{/if}}
+  {{/if}}
   </div>
 </template>
 
@@ -63,7 +73,8 @@
 
 <template name="current_question">
   <div id="current_question">
-    What is 2 x 2?
+    Question # {{ question_number }}
+    {{ question_text }}
     <input id="answer" type="text">
     <button id="answer_button">Submit</button>
   </div>

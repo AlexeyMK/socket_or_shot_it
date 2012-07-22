@@ -3,6 +3,11 @@ Background: I wrote this for the LAL hackathon (http://www.facebook.com/event.ph
 Based on an early version of https://github.com/ry/node_chat
 (http://dhotson.tumblr.com/post/271733389/a-simple-chat-server-in-node-js)
 
+
+BUGS:
+- names are empty (probably a cookie bug)
+- admin panel next round doesn't update
+
 TODO
 - Rewrite using express.js and socket.io
   x Player shows up, we get their name.
@@ -19,5 +24,6 @@ TODO
 - timeout for questions (or manual DM override)
 - ability to re-join if dropped and you were around before
 - scoreboard
+- change name to Ballmer Peak reference (Peakathaon? Ballmer Challenge?)
 ----
 - for now, kill 'last one to respond' (on dm response)
