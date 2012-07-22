@@ -8,10 +8,11 @@ if Meteor.is_server
     Questions.insert
       round: 0
       text: "What's two times two?"
+      solution: 4
     Questions.insert
       round: 1
       text: "How are you Today?"
-
+      solution: 'good'
     ServerState.insert
       current_round: -1
 
@@ -32,6 +33,9 @@ game_started = ->
 game_over = ->
   # can't find the current question, must be over
   game_started() and not current_question()
+
+update_correct_answer = -> 1
+update_wrong_answer = -> 1
 
 if Meteor.is_client
   Template.main.game_started = -> game_started()
@@ -59,6 +63,19 @@ if Meteor.is_client
 
   Template.current_question.question_number = ->
     current_question().round
+
+  Template.current_question.events =
+    "click button#answer_question": ->
+      answer = $('input#answer').val().trim()
+      console.log answer, current_question().solution
+      # heh, coffeescript forces === so I have to coerce myself
+      if String(answer) is String(current_question().solution)
+        update_correct_answer(get_contestant(), current_question().round)
+        $('#feedback').text "good job"
+      else
+        update_wrong_answer(get_contestant(), current_question().round)
+        $('#feedback').text "not quite"
+
 
   Template.admin_panel.game_started = -> game_started()
   Template.admin_panel.game_over = -> game_over()
