@@ -22,6 +22,7 @@ if Meteor.is_server
       current_round: -1
       points_for_correct: [10,5,3]  # this also indicates 3 correct total
       penalty_for_wrong: -2
+      admin_id: ''
 
 server_state = ->
   ServerState.findOne({})
@@ -33,7 +34,10 @@ next_round = ->
   $('#current_question').show()
 
 get_contestants = ->
-  results = Contestants.find().map (c) ->
+  active_players = Contestants.find
+    name: $ne: ''
+    _id: $ne: server_state()?.admin_id
+  results = active_players.map (c) ->
     # Resolve duplicate names by using an ID prefix
     c.display_name = "#{ c.name } (#{c._id[..4]}) "
     c
@@ -90,7 +94,7 @@ update_wrong_answer = (contestant, round) ->
 if Meteor.is_client
   Template.main.game_started = -> game_started()
   Template.main.game_over = -> game_over()
-  Template.main.is_admin = -> true # FOR NOW
+  Template.main.is_admin = -> get_contestant()._id == server_state()?.admin_id
   Template.main.player_in_game = -> get_contestant().name isnt ''
 
   Template.wait_for_start.contestant_name = -> get_contestant().display_name
@@ -99,8 +103,11 @@ if Meteor.is_client
     "click button#register_button": ->
       name = $('input#username').val().trim()
       contestant_id = get_contestant()._id
-      Contestants.update contestant_id,
-        name: name
+      # if youre first youre the admin
+      is_admin = Contestants.find(name: $ne: '').count() == 0
+      Contestants.update contestant_id, name: name
+      ServerState.update({}, $set: admin_id: contestant_id) if is_admin
+      console.log "new user #{name}, id #{contestant_id} is admin? #{is_admin}"
       Session.set('contestant', Contestants.findOne(contestant_id,
         reactive: false))
 
@@ -108,7 +115,7 @@ if Meteor.is_client
     scoreboard = {}
     console.log "updating contestants"
     get_contestants().forEach (c) ->
-      if c.name isnt ''
+      if c.name isnt '' and c._id isnt server_state()?.admin_id
         scoreboard[c._id] =
           name: c.display_name
           score: 0
