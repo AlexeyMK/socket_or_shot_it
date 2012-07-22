@@ -108,9 +108,10 @@ if Meteor.is_client
     scoreboard = {}
     console.log "updating contestants"
     get_contestants().forEach (c) ->
-      scoreboard[c._id] =
-        name: c.display_name
-        score: 0
+      if c.name isnt ''
+        scoreboard[c._id] =
+          name: c.display_name
+          score: 0
 
     # iterate over answers
     Answers.find().forEach (answer) ->
