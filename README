@@ -16,8 +16,8 @@ TODO
   x Logic for moving to the next round when # of qs solved
   x Leaderboard/updates
 - admin is really admin
-- provide half-decent interface (bootstrap?)
-- better description from points
+x provide half-decent interface (bootstrap?)
+- better description of how points work
 - Questions in their own file (these are basically burned now)
 - correct answer securely hidden
 - Convert question to markdown
@@ -25,5 +25,6 @@ TODO
 - question clock timer
 - ability to re-join if dropped and you were around before
 - change name to Ballmer Peak reference (Peakathaon? Ballmer Challenge?)
+- random drinking events
 ----
 - for now, kill 'last one to respond' (on dm response)

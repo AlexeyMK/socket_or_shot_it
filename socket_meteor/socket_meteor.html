@@ -40,6 +40,10 @@
     <div id="span4">
       {{> scoreboard}}
     </div>
+  </div>
+  <div class="row-fluid">
+    <p> PRODUCT_NAME is a speed programming competition.  You get a question.  The first three people to answer correctly get 10, 5, and 3 points respectively.  A wrong answer takes two points away from your score.  The question changes after three people have answered correctly or at the moderator's discretion.  There are 10 (or so) questions.  Good luck.</p>
+  </div>
 </div>
 </template>
 
@@ -79,7 +83,7 @@
 
 <template name="current_question">
   <div id="current_question">
-    <h1>Question # {{ question_number }}</h1>
+    <h1>Question #{{ question_number }}</h1>
     <p>{{ question_text }}</p>
     <p>
       <input id="answer" type="text">
