@@ -3,6 +3,8 @@ Background: I wrote this for the LAL hackathon (http://www.facebook.com/event.ph
 Based on an early version of https://github.com/ry/node_chat
 (http://dhotson.tumblr.com/post/271733389/a-simple-chat-server-in-node-js)
 
+Bug: Wrong person just becamse the admin
+
 
 TODO
 - Rewrite using express.js and socket.io
@@ -15,9 +17,9 @@ TODO
   x Logic for moving to the next round manually
   x Logic for moving to the next round when # of qs solved
   x Leaderboard/updates
-- admin is really admin
+x admin is really admin
 x provide half-decent interface (bootstrap?)
-- better description of how points work
+x better description of how points work
 - Questions in their own file (these are basically burned now)
 - correct answer securely hidden
 - Convert question to markdown

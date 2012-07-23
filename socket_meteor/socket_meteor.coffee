@@ -10,14 +10,6 @@ ServerState = new Meteor.Collection('serverstate')
 
 if Meteor.is_server
   Meteor.startup ->
-    Questions.insert
-      round: 0
-      text: "What's two times two?"
-      solution: 4
-    Questions.insert
-      round: 1
-      text: "How are you Today?"
-      solution: 'good'
     ServerState.insert
       current_round: -1
       points_for_correct: [10,5,3]  # this also indicates 3 correct total
