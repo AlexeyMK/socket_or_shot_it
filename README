@@ -7,20 +7,19 @@ Bug: Wrong person just becamse the admin
 
 
 TODO
-- Rewrite using express.js and socket.io
-  x Player shows up, we get their name.
-  x We have a list of player's names.
-  x Admin can 'start game'
-  x Players see question of current round
-  x Players can answer questions
-    x Get response "right or wrong"
-  x Logic for moving to the next round manually
-  x Logic for moving to the next round when # of qs solved
-  x Leaderboard/updates
+x Player shows up, we get their name.
+x We have a list of player's names.
+x Admin can 'start game'
+x Players see question of current round
+x Players can answer questions
+  x Get response "right or wrong"
+x Logic for moving to the next round manually
+x Logic for moving to the next round when # of qs solved
+x Leaderboard/updates
 x admin is really admin
 x provide half-decent interface (bootstrap?)
 x better description of how points work
-- Questions in their own file (these are basically burned now)
+x Questions in their own file (these are basically burned now)
 - correct answer securely hidden
 - Convert question to markdown
 - timeout for questions (or manual DM override)
