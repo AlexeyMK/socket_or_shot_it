@@ -115,7 +115,7 @@ if Meteor.is_client
     # iterate over answers
     Answers.find().forEach (answer) ->
       console.log answer, answer.point_value
-      scoreboard[answer.contestant_id].score += answer.point_value
+      scoreboard[answer.contestant_id].score += answer.point_value if scoreboard[answer.contestant_id]
 
     (v for k, v of scoreboard)
 
@@ -132,12 +132,12 @@ if Meteor.is_client
       # heh, coffeescript forces === so I have to coerce myself
       if String(answer) is String(current_question().solution)
         update_correct_answer(get_contestant(), current_question().round)
-        $('#feedback').text "good job"
-        $('#current_question').hide()
+        $("#answer_question").addClass("disabled");
+        $('#feedback').text "Good Job"
       else
         console.log "wrong answer"
         update_wrong_answer(get_contestant(), current_question().round)
-        $('#feedback').text "not quite"
+        $('#feedback').text "Not Quite"
 
 
   Template.admin_panel.game_started = -> game_started()

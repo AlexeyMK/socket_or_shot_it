@@ -1,1 +1,36 @@
 /* CSS declarations go here */
+
+HR {
+    margin-bottom: 3px;
+}
+
+H1.title {
+    margin-bottom: 12px;
+}
+
+H2.header {
+    margin-bottom: 6px;
+}
+
+H3.header {
+    margin-bottom: 15px;
+}
+
+.well.left_well {
+    padding: 15px 19px;
+    margin: 0 0 5px;
+    min-height: 40px;
+}
+
+#answer_question, #register_button {
+    margin-left: -4px;
+}
+
+.row-fluid {
+    margin-top: 10px;
+}
+
+.footer {
+    font-size: 11px;
+    margin-top: 10px;
+}
