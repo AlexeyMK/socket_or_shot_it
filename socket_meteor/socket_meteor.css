@@ -5,7 +5,15 @@ HR {
 }
 
 H1.title {
-    margin-bottom: 12px;
+    font-family: 'Nixie One', serif;
+    font-size: 55px;
+    line-height: 60px;
+    margin: 20px 0 20px;
+}
+
+.title_icon {
+    float: left;
+    margin: 18px 20px 0 0;
 }
 
 H2.header {
